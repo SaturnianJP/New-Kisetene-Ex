@@ -1,9 +1,9 @@
-着せ替え支援ツール「キセテネ」の改良版
+**着せ替え支援ツール「キセテネ」の改良版**
 
 「さたにあしょっぴんぐ」-> 「New Kisetene Ex」にあります。
 Ctrl + Shift + T でも開きます。
 
-【元ツールのリンク】
+**【元ツールのリンク】**
 　灯火/とも屋
 　・https://shivi.booth.pm/
 
@@ -11,7 +11,7 @@ Ctrl + Shift + T でも開きます。
 　・https://shivi.booth.pm/items/2332420
 
 
-【改良版作成者】
+**【改良版作成者】**
 　さたにあ
 　・https://twitter.com/71s9
 
