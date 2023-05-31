@@ -74,6 +74,12 @@ namespace Saturnian_NewKiseteneEx
             //アバターを複製
             Animator m_AvatarInstance = Instantiate(m_Avatar);
 
+            //元の名前に
+            m_AvatarInstance.name = m_Avatar.name;
+
+            //服の名前つける
+            m_AvatarInstance.name += $" ({m_cloth.name})";
+
             //元のアバターを非アクティブに
             m_Avatar.gameObject.SetActive(false);
 
@@ -531,7 +537,7 @@ namespace Saturnian_NewKiseteneEx
 
                 if (i == (int)HumanBodyBones.LeftUpperLeg)
                 {
-                    if (Kuronatu.Thighs_L != null)
+                    if (Kuronatu.ThingsL != null)
                     {
                         var avatar_thing_L = FindBone_FullMatch(p, Kuronatu.Thighs_L);
                         if (avatar_thing_L != null)
@@ -548,7 +554,7 @@ namespace Saturnian_NewKiseteneEx
 
                 if (i == (int)HumanBodyBones.RightUpperLeg)
                 {
-                    if (Kuronatu.Thighs_R != null)
+                    if (Kuronatu.ThingsR != null)
                     {
                         var avatar_thing_R = FindBone_FullMatch(p, Kuronatu.Thighs_R);
                         if (avatar_thing_R != null)
@@ -684,11 +690,12 @@ namespace Saturnian_NewKiseteneEx
                 return;
 
             GameObject copyAvatar = Instantiate(Avatar);
-            Avatar.SetActive(false);
-            copyAvatar.SetActive(true);
+            copyAvatar.name += " (Backup)";
+            Avatar.SetActive(true);
+            copyAvatar.SetActive(false);
             copyAvatar = Avatar;
 
-            RemoveCloth(Avatar, name);
+            RemoveCloth(Avatar, name, hash);
 
             foreach (var action in removeActions)
             {
@@ -704,10 +711,13 @@ namespace Saturnian_NewKiseteneEx
             KiseteneComponent kisetenecomponent = cloth.GetComponent<KiseteneComponent>();
             if (kisetenecomponent)
             {
-                removeActions.Add(() =>
+                if (kisetenecomponent.hash == hash)
                 {
-                    _DestroyObject(cloth);
-                });
+                    removeActions.Add(() =>
+                    {
+                        _DestroyObject(cloth);
+                    });
+                }
             }
 
             //子要素がいなければ終了
@@ -718,31 +728,34 @@ namespace Saturnian_NewKiseteneEx
 
             foreach (Transform ob in children)
             {
-                RemoveCloth(ob.gameObject, name);
+                RemoveCloth(ob.gameObject, name, hash);
             }
         }
 
-        //private static void CheckCloths(GameObject avatar)
-        //{
-        //    Transform children = avatar.GetComponentInChildren<Transform>();
-        //    KiseteneComponent kisetenecomponent = avatar.GetComponent<KiseteneComponent>();
-        //    if (kisetenecomponent)
-        //    {
-        //        if (!_takeoffList.ContainsKey(kisetenecomponent.hash))
-        //            _takeoffList.Add(kisetenecomponent.hash, kisetenecomponent.cloth_name);
-        //    }
+        private static void CheckCloths(GameObject avatar)
+        {
+            if (avatar == null)
+                return;
 
-        //    //子要素がいなければ終了
-        //    if (children.childCount == 0)
-        //    {
-        //        return;
-        //    }
+            Transform children = avatar.GetComponentInChildren<Transform>();
+            KiseteneComponent kisetenecomponent = avatar.GetComponent<KiseteneComponent>();
+            if (kisetenecomponent)
+            {
+                if (!_takeoffList.ContainsKey(kisetenecomponent.hash))
+                    _takeoffList.Add(kisetenecomponent.hash, kisetenecomponent.cloth_name);
+            }
 
-        //    foreach (Transform ob in children)
-        //    {
-        //        CheckCloths(ob.gameObject);
-        //    }
-        //}
+            //子要素がいなければ終了
+            if (children.childCount == 0)
+            {
+                return;
+            }
+
+            foreach (Transform ob in children)
+            {
+                CheckCloths(ob.gameObject);
+            }
+        }
     }
 }
 

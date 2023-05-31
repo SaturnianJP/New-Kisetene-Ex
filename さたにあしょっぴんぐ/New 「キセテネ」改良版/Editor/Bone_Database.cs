@@ -537,12 +537,12 @@ bone_breast03_L
 /*      
 Hips_L
 */
-        public static string Hips_L_Regex = "Hips_L";
+        public static string Hips_L_Regex = "Hips_L|Hips.L";
 
 /*      
 Hips_R
 */
-        public static string Hips_R_Regex = "Hips_R";
+        public static string Hips_R_Regex = "Hips_R|Hips.R";
 
         /*
 hai.L
@@ -694,8 +694,11 @@ Left_UpLeg
 LeftUpperLeg
 Left Upper Leg
 UpperLeg.L
+Upper_Leg_L
+upper_leg_l
+upper_leg_L
             */
-            { HumanBodyBones.LeftUpperLeg, "(?:upper(?:_(?:Leg(?:\\.l|_L)|leg(?:\\.l|_L))| (?:leg\\.[Ll]|Leg\\.l))|Upper(?:(?:_[Ll]eg\\.|Leg[._])L| Leg\\.[Ll])|Left(?: (?:Upper L|l)|(?:Upper|_Up)L)eg|bone_upleg_L)" },
+            { HumanBodyBones.LeftUpperLeg, "(?:upper(?:_(?:leg(?:_[Ll]|\\.l)|Leg(?:\\.l|_L))| (?:leg\\.[Ll]|Leg\\.l))|Upper(?:(?:_(?:Leg[._]|leg\\.)|Leg[._])L| Leg\\.[Ll])|Left(?: (?:Upper L|l)|(?:Upper|_Up)L)eg|bone_upleg_L)" },
 
 
             /*
@@ -727,8 +730,11 @@ lower leg.l
 Left_Leg
 LeftLowerLeg
 Left Lower Leg
+Lower_Leg_L
+lower_leg_l
+lower_leg_L
             */
-            { HumanBodyBones.LeftLowerLeg, "(?:L(?:ower(?:(?: Leg[._]|_leg\\.)L|Leg(?:\\.[Ll]|_[Ll])|leg(?:\\.[Ll]|_[Ll]))|eft(?: (?:Lower Leg|knee)|(?:Lower|_)Leg))|lower(?:Leg(?:\\.[Ll]|_[Ll])|leg(?:\\.[Ll]|_L)|_leg(?:\\.l|_L)| leg\\.l)|bone_leg_L)" },
+            { HumanBodyBones.LeftLowerLeg, "(?:L(?:ower(?:(?:_(?:leg\\.|Leg_)| Leg[._])L|Leg(?:\\.[Ll]|_[Ll])|leg(?:\\.[Ll]|_[Ll]))|eft(?: (?:Lower Leg|knee)|(?:Lower|_)Leg))|lower(?:Leg(?:\\.[Ll]|_[Ll])|_leg(?:_[Ll]|\\.l)|leg(?:\\.[Ll]|_L)| leg\\.l)|bone_leg_L)" },
 
 
             /*
@@ -791,8 +797,11 @@ Right Upper Leg
 UpperLeg.R
 upperleg.r
 upperleg.R
+Upper_Leg_R
+upper_leg_r
+upper_leg_R
             */
-            { HumanBodyBones.RightUpperLeg, "(?:upper(?:_(?:Leg(?:\\.r|_R)|leg(?:\\.r|_R))| (?:leg\\.[Rr]|Leg\\.r)|leg\\.[Rr])|Upper(?:(?:_[Ll]eg\\.|Leg[._])R| Leg\\.[Rr])|Right(?: (?:Upper L|l)|(?:Upper|_Up)L)eg|bone_upleg_R)" },
+            { HumanBodyBones.RightUpperLeg, "(?:upper(?:_(?:leg(?:_[Rr]|\\.r)|Leg(?:\\.r|_R))| (?:leg\\.[Rr]|Leg\\.r)|leg\\.[Rr])|Upper(?:(?:_(?:Leg[._]|leg\\.)|Leg[._])R| Leg\\.[Rr])|Right(?: (?:Upper L|l)|(?:Upper|_Up)L)eg|bone_upleg_R)" },
 
 
             /*

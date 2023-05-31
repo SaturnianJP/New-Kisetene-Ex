@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEditor.UIElements;
@@ -20,7 +21,7 @@ namespace Saturnian_NewKiseteneEx
         /// <summary>
         /// 服のリスト
         /// </summary>
-        private Dictionary<string, string> _takeoffList = new Dictionary<string, string>();
+        private static Dictionary<string, string> _takeoffList = new Dictionary<string, string>();
 
         int selectedTab = 1;
 
@@ -633,11 +634,11 @@ namespace Saturnian_NewKiseteneEx
             RemoveCloth_Avatar = EditorGUILayout.ObjectField("脱がすアバター", RemoveCloth_Avatar, typeof(GameObject), true) as GameObject;
             if (EditorGUI.EndChangeCheck())
             {
-                //_takeoffList.Clear();
-                //CheckCloths(RemoveCloth_Avatar);
+                _takeoffList.Clear();
+                CheckCloths(RemoveCloth_Avatar);
             }
 
-
+            
 
             richTextStyle = new GUIStyle(GUI.skin.button);
             richTextStyle.richText = true;
@@ -652,13 +653,24 @@ namespace Saturnian_NewKiseteneEx
 
             EditorGUILayout.BeginScrollView(_takeoffMenuScroll);
 
-            //foreach (var takeoff in _takeoffList)
-            //{
-            //    string hash = takeoff.Key;
-            //    string name = takeoff.Value;
+            if (RemoveCloth_Avatar != null)
+            {
+                foreach (var takeoff in _takeoffList.ToArray())
+                {
+                    string hash = takeoff.Key;
+                    string name = takeoff.Value;
 
+                    if (GUILayout.Button($"name = {name}, hash = {hash}"))
+                    {
+                        RemoveCloths(RemoveCloth_Avatar, name, hash);
 
-            //}
+                        MessageBox($"{name}を削除しました！", Localized.ok);
+
+                        _takeoffList.Clear();
+                        CheckCloths(RemoveCloth_Avatar);
+                    }
+                }
+            }
 
             EditorGUILayout.EndScrollView();
         }
